@@ -9,7 +9,7 @@ import Link from 'next/link'
 import React from 'react'
 
 const ProfilePage = async ({ searchParams }: SearchParamProps) => {
-  const { sessionClaims } = auth()
+  const { sessionClaims } = await auth()
   const userId = sessionClaims?.userId as string
 
   const ordersPage = Number(searchParams?.ordersPage) || 1
