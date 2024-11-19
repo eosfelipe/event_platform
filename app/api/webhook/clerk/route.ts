@@ -5,6 +5,10 @@ import { createUser, deleteUser, updateUser } from '@/lib/actions/user.actions'
 import { clerkClient } from '@clerk/nextjs/server'
 import { NextResponse } from 'next/server'
 
+export async function GET(req: Request) {
+  return new Response('test', { status: 200 })
+}
+
 export async function POST(req: Request) {
   // You can find this in the Clerk Dashboard -> Webhooks -> choose the webhook
   const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET
@@ -50,6 +54,8 @@ export async function POST(req: Request) {
       status: 400
     })
   }
+
+  console.log(evt)
 
   // Get the ID and type
   const { id } = evt.data
