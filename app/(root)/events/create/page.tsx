@@ -1,10 +1,12 @@
 import EventForm from '@/components/shared/EventForm'
-import { auth } from '@clerk/nextjs/server'
+import { auth, currentUser } from '@clerk/nextjs/server'
 
 const CreateEvent = async () => {
-  const { sessionClaims } = await auth()
+  const { publicMetadata } = await currentUser()
 
-  const userId = sessionClaims?.userId as string
+  const userId = publicMetadata.userId
+
+  // const userId = sessionClaims?.userId as string
 
   return (
     <>
@@ -14,9 +16,11 @@ const CreateEvent = async () => {
         </h3>
       </section>
 
-      <div className="wrapper my-8">
-        <EventForm userId={userId} type="Create" />
-      </div>
+      {userId && (
+        <div className="wrapper my-8">
+          <EventForm userId={userId} type="Create" />
+        </div>
+      )}
     </>
   )
 }

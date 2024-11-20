@@ -55,8 +55,6 @@ export async function POST(req: Request) {
     })
   }
 
-  console.log(evt)
-
   // Get the ID and type
   const { id } = evt.data
   const eventType = evt.type
@@ -76,13 +74,12 @@ export async function POST(req: Request) {
 
     const newUser = await createUser(user)
 
-    console.log(newUser)
-
     if (newUser) {
       /* @ts-ignore */
       await clerkClient.users.updateUserMetadata(id, {
         publicMetadata: {
-          userId: newUser._id
+          userId: newUser._id, //mongo _id for User
+          example: 'corosito'
         }
       })
     }
