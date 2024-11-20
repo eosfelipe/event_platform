@@ -2,9 +2,9 @@ import EventForm from '@/components/shared/EventForm'
 import { auth, currentUser } from '@clerk/nextjs/server'
 
 const CreateEvent = async () => {
-  const { publicMetadata } = await currentUser()
+  const user = await currentUser()
 
-  const userId = publicMetadata.userId
+  const userId = user!.publicMetadata.userId as string
 
   // const userId = sessionClaims?.userId as string
 
